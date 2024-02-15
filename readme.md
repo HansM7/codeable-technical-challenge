@@ -87,6 +87,10 @@ Necesitaremos poder ejecutar javascript del lado del servidor, nodejs nos ayudar
    ```bash
     GET /api/seed
    ```
+6. Para ver la documentacion de las autenticaciones podemos a la siguiente url en le navegador, ten en cuenta el puerto elegido
+   ```bash
+    http://localhost:5500/api-docs
+   ```
 
 Listo, ya tenemos el backend listo para ser usando, ahora nos dirigiremos al frontend 🚀
 
