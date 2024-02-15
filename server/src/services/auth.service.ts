@@ -38,7 +38,7 @@ class AuthService {
         return httpService.http401("Error in authentication");
       return httpService.http200("Authentication successful");
     } catch (error) {
-      return httpService.http500("Error in login", error);
+      return httpService.http500("Error in validation", error);
     }
   }
 }

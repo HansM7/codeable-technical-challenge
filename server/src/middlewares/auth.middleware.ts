@@ -11,10 +11,13 @@ class AuthMiddleware {
       next();
     } catch (error) {
       if (error instanceof ZodError) {
-        const response = httpService.http400("Error in schema", error.issues);
+        const response = httpService.http400(
+          "Error in authentication",
+          error.issues
+        );
         res.status(response.code).json(response.response);
       } else {
-        const response = httpService.http500("Error server", error);
+        const response = httpService.http500("Error in authentication", error);
         res.status(response.code).json(response.response);
       }
     }
