@@ -37,12 +37,11 @@ class FileService {
         else {
           success.push(row);
 
-          // await userService.create({
-          //   name: row.name,
-          //   email: row.email,
-          //   age: row.age,
-          // });
-          //
+          await userService.create({
+            name: row.name,
+            email: row.email,
+            age: row.age,
+          });
         }
       });
 

@@ -44,6 +44,7 @@ function IndexTemplate({
             setSection={setSection}
             errors={errors}
             success={success}
+            setErrors={setErrors}
           ></DetailUploadOrganism>
         </ContainerTemplate>
       </div>

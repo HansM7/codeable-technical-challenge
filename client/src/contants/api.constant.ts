@@ -5,3 +5,5 @@ export const api_get_me = api + "/auth/me";
 
 export const api_post_upload = api + "/uploads";
 export const api_post_upload_validate = api + "/uploads/validate";
+
+export const api_post_users = api + "/users";

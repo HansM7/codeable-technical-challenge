@@ -4,6 +4,11 @@ import { httpService } from "./response.service";
 import { userService } from "./user.service";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import "dotenv/config";
+
+const secretKey = process.env.SECRET_KEY
+  ? process.env.SECRET_KEY
+  : "secret-auth";
 
 class AuthService {
   async login(data: ILogin) {
@@ -16,7 +21,7 @@ class AuthService {
       if (!res_compare || user.role !== "admin")
         return httpService.http401("Error in authentication");
 
-      const token = jwt.sign({ id: user.id }, "secret-auth");
+      const token = jwt.sign({ id: user.id }, secretKey);
       return httpService.http200("Authentication successful", { token });
     } catch (error) {
       return httpService.http500("Error in login", error);
@@ -25,7 +30,7 @@ class AuthService {
 
   async validateAdmin(token: string) {
     try {
-      const { id }: any = jwt.verify(token, "secret-auth");
+      const { id }: any = jwt.verify(token, secretKey);
       const res_user = await userService.findUser(id.toString());
       if (!res_user.response.ok) return res_user;
       const user = res_user.response.data as IUser;

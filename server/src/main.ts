@@ -3,6 +3,8 @@ import seedRouter from "./routes/seed.route";
 import authRouter from "./routes/auth.router";
 import fileRouter from "./routes/file.router";
 import cors from "cors";
+import userRouter from "./routes/user.router";
+import "dotenv/config";
 
 const globalPrefix = "/api";
 
@@ -20,5 +22,10 @@ app.use(
 app.use(globalPrefix, seedRouter);
 app.use(globalPrefix, authRouter);
 app.use(globalPrefix, fileRouter);
+app.use(globalPrefix, userRouter);
 
-app.listen(5500);
+app.listen(Number(process.env.PORT) | 5500, () => {
+  console.log(
+    "The application is running in https://localhost:" + process.env.PORT
+  );
+});

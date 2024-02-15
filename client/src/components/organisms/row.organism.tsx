@@ -2,8 +2,18 @@ import { useFormik } from "formik";
 import { Button } from "../ui/button";
 import { rowSchema } from "@/models/row.model";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { api_post_users } from "@/contants/api.constant";
 
-function RowOrganism({ error }: { error: any }) {
+function RowOrganism({
+  index,
+  error,
+  handleRemoveRow,
+}: {
+  index: number;
+  error: any;
+  handleRemoveRow: any;
+}) {
   const formik: any = useFormik({
     initialValues: {
       name: error.details.name.value,
@@ -11,13 +21,31 @@ function RowOrganism({ error }: { error: any }) {
       age: error.details.age.value,
     },
     validationSchema: rowSchema,
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      try {
+        const headers = {
+          Authorization: window.localStorage.getItem("auth-session") as string,
+        };
+
+        await axios.post(api_post_users, values, { headers });
+        handleRemoveRow(index);
+      } catch (error) {
+        alert("Error in register row");
+      }
+    },
   });
+
+  useEffect(() => {
+    formik.setValues({
+      name: error.details.name.value,
+      email: error.details.email.value,
+      age: error.details.age.value,
+    });
+  }, [index, error]);
 
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    console.log(formik.errors);
     if (formik.errors.name || formik.errors.email || formik.errors.age) {
       if (!isError) {
         setIsError(true);
