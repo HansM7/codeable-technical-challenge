@@ -1,0 +1,3 @@
+class AuthQuery {
+  async findAdmin() {}
+}

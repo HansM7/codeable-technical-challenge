@@ -1,0 +1,14 @@
+import { Pool } from "pg";
+
+export const pool = new Pool({
+  // host: process.env["PGHOST"],
+  // port: Number(process.env["PGPORT"]),
+  // database: process.env["PGDATABASE"],
+  // user: process.env["PGUSER"],
+  // password: "admin",
+  host: "localhost",
+  port: 5432,
+  database: "app_test",
+  user: "postgres",
+  password: "admin",
+});
